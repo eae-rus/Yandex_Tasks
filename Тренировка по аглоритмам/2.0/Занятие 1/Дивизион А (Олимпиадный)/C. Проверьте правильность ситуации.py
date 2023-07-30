@@ -17,7 +17,8 @@ def main():
         
         # -------------------------------------
         # проверка на ситуацию по количеству линий одинаковых цифр
-        count_equal_lines = 0
+        count_equal_lines_x = 0
+        count_equal_lines_y = 0
         is_equal_lines_cross = False
         is_equal_lines_zero = False
         for i in range (3):
@@ -28,7 +29,7 @@ def main():
                     equal_lines_x = False
                     break
             if equal_lines_x:
-                count_equal_lines += 1
+                count_equal_lines_x += 1
                 if list_points[i][0] == 1: # крестик
                     is_equal_lines_cross = True
                 else: # нолик (другого быть не может, так как тогда equal_lines_x = False)
@@ -41,13 +42,15 @@ def main():
                     equal_lines_y = False
                     break
             if equal_lines_y:
-                count_equal_lines += 1
+                count_equal_lines_y += 1
                 if list_points[0][i] == 1: # крестик
                     is_equal_lines_cross = True
                 else: # нолик
                     is_equal_lines_zero = True
         
-        if count_equal_lines > 1:
+        if count_equal_lines_x > 1:
+            return False
+        if count_equal_lines_y > 1:
             return False
         
         # -------------------------------------
@@ -95,11 +98,10 @@ def main():
         x1, x2, x3 = map(int, input().split())
         points_local = [x1, x2, x3]
         list_points.append(points_local)
-
     if is_right_situation(list_points):
         print('YES')
     else:
         print('NO')
-
+    
 if __name__ == '__main__':
 	main()

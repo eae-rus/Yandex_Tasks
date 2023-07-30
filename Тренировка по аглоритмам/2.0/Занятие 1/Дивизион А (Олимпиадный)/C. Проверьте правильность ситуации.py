@@ -15,6 +15,7 @@ def main():
         if diff > 1 or diff < 0:
             return False
         
+        # -------------------------------------
         # проверка на ситуацию по количеству линий одинаковых цифр
         count_equal_lines = 0
         is_equal_lines_cross = False
@@ -30,7 +31,7 @@ def main():
                 count_equal_lines += 1
                 if list_points[i][0] == 1: # крестик
                     is_equal_lines_cross = True
-                else: # нолик
+                else: # нолик (другого быть не может, так как тогда equal_lines_x = False)
                     is_equal_lines_zero = True
                 
             # проверка по y
@@ -45,10 +46,41 @@ def main():
                     is_equal_lines_cross = True
                 else: # нолик
                     is_equal_lines_zero = True
-                
+        
         if count_equal_lines > 1:
             return False
         
+        # -------------------------------------
+        # проверка по диагонали по убыванию
+        equal_lines_y = True
+        for i in range (2):
+            if (list_points[i][i] != list_points[i+1][i+1]) or list_points[j][i] == 0:
+                equal_lines_y = False
+                break
+        if equal_lines_y:
+            # увеличение и проверка count_equal_lines не требуется, так как возможно ситуация равенства 2 линий
+            # [0][0] - проверка в крайней точке откуда начинется диагональ
+            if list_points[0][0] == 1: # крестик
+                is_equal_lines_cross = True
+            else: # нолик
+                is_equal_lines_zero = True
+
+        # проверка по диагонали по возрастанию
+        equal_lines_y = True
+        for i in range (2):
+            # по возрастанию
+            if (list_points[2-i][i] != list_points[2-(i+1)][i+1]) or list_points[j][i] == 0:
+                equal_lines_y = False
+                break
+        if equal_lines_y:
+            # увеличение и проверка count_equal_lines не требуется, так как возможно ситуация равенства 2 линий
+            # [2][0] - проверка в крайней точке откуда начинется диагональ
+            if list_points[2][0] == 1: # крестик
+                is_equal_lines_cross = True
+            else: # нолик
+                is_equal_lines_zero = True
+
+        # -------------------------------------
         # проверка обобщения
         if is_equal_lines_cross and (diff != 1):
             return False

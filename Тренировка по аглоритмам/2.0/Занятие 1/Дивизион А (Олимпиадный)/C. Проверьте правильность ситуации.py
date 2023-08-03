@@ -55,12 +55,12 @@ def main():
         
         # -------------------------------------
         # проверка по диагонали по убыванию
-        equal_lines_y = True
+        equal_lines_diagonal = True
         for i in range (2):
             if (list_points[i][i] != list_points[i+1][i+1]) or list_points[j][i] == 0:
-                equal_lines_y = False
+                equal_lines_diagonal = False
                 break
-        if equal_lines_y:
+        if equal_lines_diagonal:
             # увеличение и проверка count_equal_lines не требуется, так как возможно ситуация равенства 2 линий
             # [0][0] - проверка в крайней точке откуда начинется диагональ
             if list_points[0][0] == 1: # крестик
@@ -69,13 +69,13 @@ def main():
                 is_equal_lines_zero = True
 
         # проверка по диагонали по возрастанию
-        equal_lines_y = True
+        equal_lines_diagonal = True
         for i in range (2):
             # по возрастанию
             if (list_points[2-i][i] != list_points[2-(i+1)][i+1]) or list_points[j][i] == 0:
-                equal_lines_y = False
+                equal_lines_diagonal = False
                 break
-        if equal_lines_y:
+        if equal_lines_diagonal:
             # увеличение и проверка count_equal_lines не требуется, так как возможно ситуация равенства 2 линий
             # [2][0] - проверка в крайней точке откуда начинется диагональ
             if list_points[2][0] == 1: # крестик
@@ -89,7 +89,15 @@ def main():
             return False
         elif is_equal_lines_zero and (diff != 0):
             return False
-                
+        
+        
+        # -------------------------------------
+        # !!!!!!!!!!!!!!!!!!!!!!!!!!
+        # обдумать и добавить проверку, что после победы крестиков, не может быть победы ноликов (возможно этот момент как-то упущен)
+        # ибо в конце проверяется не он, или не совсем он (ниже часть неверная в итоге...)
+        if is_equal_lines_cross and is_equal_lines_zero:
+            return False
+        
         return True
     
     

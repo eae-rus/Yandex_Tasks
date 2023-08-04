@@ -6,10 +6,11 @@ def main():
     max_A = max(A_list)
     sum_A = sum(A_list)
     answer = 1
-    if sum_A - 2*max_A == 0:
-        answer = sum_A
-    else:
+    if 2*max_A - sum_A > 0:
         answer = 2*max_A - sum_A
+    else:
+        answer = sum_A
+        
     print(answer)    
     
     

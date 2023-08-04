@@ -16,77 +16,48 @@ def main():
             return False
         
         # -------------------------------------
-        # проверка на ситуацию по количеству линий одинаковых цифр
-        is_equal_lines_cross = False
-        is_equal_lines_zero = False
+        # поиск победителей
+        is_win_cross = False
+        is_win_zero = False
+        # проверка по x
         for i in range (3):
-            # проверка по x
-            equal_lines_x = True
-            for j in range(2):
-                if (list_points[i][j] != list_points[i][j+1]) or list_points[i][j] == 0:
-                    equal_lines_x = False
-                    break
-            if equal_lines_x:
+            if (list_points[i][0] != 0) and (list_points[i][0] == list_points[i][1]) and (list_points[i][1] == list_points[i][2]):
                 if list_points[i][0] == 1: # крестик
-                    is_equal_lines_cross = True
-                else: # нолик (другого быть не может, так как тогда equal_lines_x = False)
-                    is_equal_lines_zero = True
-                
-            # проверка по y
-            equal_lines_y = True
-            for j in range (2):
-                if (list_points[j][i] != list_points[j+1][i]) or list_points[j][i] == 0:
-                    equal_lines_y = False
-                    break
-            if equal_lines_y:
+                    is_win_cross = True
+                else: # нолик (другого быть не может, так как 0 проверили)
+                    is_win_zero = True
+        
+        # проверка по y
+        for i in range (3):
+            if (list_points[0][i] != 0) and (list_points[0][i] == list_points[1][i]) and (list_points[1][i] == list_points[2][i]):
                 if list_points[0][i] == 1: # крестик
-                    is_equal_lines_cross = True
-                else: # нолик
-                    is_equal_lines_zero = True
+                    is_win_cross = True
+                else: # нолик (другого быть не может, так как 0 проверили)
+                    is_win_zero = True
         
         # -------------------------------------
-        # проверка по диагонали по убыванию
-        equal_lines_diagonal = True
-        for i in range (2):
-            if (list_points[i][i] != list_points[i+1][i+1]) or list_points[j][i] == 0:
-                equal_lines_diagonal = False
-                break
-        if equal_lines_diagonal:
-            # увеличение и проверка count_equal_lines не требуется, так как возможно ситуация равенства 2 линий
-            # [0][0] - проверка в крайней точке откуда начинется диагональ
+        # проверка по диагоналям
+        if (list_points[0][0] != 0) and (list_points[0][0] == list_points[1][1]) and (list_points[1][1] == list_points[2][2]):
             if list_points[0][0] == 1: # крестик
-                is_equal_lines_cross = True
-            else: # нолик
-                is_equal_lines_zero = True
-
-        # проверка по диагонали по возрастанию
-        equal_lines_diagonal = True
-        for i in range (2):
-            # по возрастанию
-            if (list_points[2-i][i] != list_points[2-(i+1)][i+1]) or list_points[j][i] == 0:
-                equal_lines_diagonal = False
-                break
-        if equal_lines_diagonal:
-            # увеличение и проверка count_equal_lines не требуется, так как возможно ситуация равенства 2 линий
-            # [2][0] - проверка в крайней точке откуда начинется диагональ
-            if list_points[2][0] == 1: # крестик
-                is_equal_lines_cross = True
-            else: # нолик
-                is_equal_lines_zero = True
+                is_win_cross = True
+            else: # нолик (другого быть не может, так как 0 проверили)
+                is_win_zero = True
+        if (list_points[0][2] != 0) and (list_points[0][2] == list_points[1][1]) and (list_points[1][1] == list_points[2][0]):
+            if list_points[0][2] == 1: # крестик
+                is_win_cross = True
+            else: # нолик (другого быть не может, так как 0 проверили)
+                is_win_zero = True
 
         # -------------------------------------
-        # !!!!!!!!!!!!!!!!!!!!!!!!!!
-        # обдумать и добавить проверку, что после победы крестиков, не может быть победы ноликов (возможно этот момент как-то упущен)
-        # ибо в конце проверяется не он, или не совсем он (ниже часть неверная в итоге...)
-        # возможно,
-        if is_equal_lines_cross and is_equal_lines_zero:
+        # проверка, что нет одновременно двух победителей
+        if is_win_cross and is_win_zero:
             return False
 
         # -------------------------------------
-        # проверка обобщения
-        if is_equal_lines_cross and (diff != 1):
+        # проверка  что после победы нет хода
+        if is_win_cross and (diff != 1):
             return False
-        elif is_equal_lines_zero and (diff != 0):
+        elif is_win_zero and (diff != 0):
             return False
         
         return True

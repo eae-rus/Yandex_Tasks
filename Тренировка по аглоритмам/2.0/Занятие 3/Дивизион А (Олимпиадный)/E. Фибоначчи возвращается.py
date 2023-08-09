@@ -10,16 +10,16 @@ def main():
         A[i] = Decimal(input())
         
     max_number = max(A)
+    set_Fibonacci = set()
+    set_Fibonacci.add(1)
     
-    list_Fibonacci = []
-    list_Fibonacci.append(1)
-    list_Fibonacci.append(1)
+    Fibonacci_1 = 1
+    Fibonacci_2 = 1
     while True:
-        list_Fibonacci.append(list_Fibonacci[-1] + list_Fibonacci[-2])
-        if list_Fibonacci[-1] > max_number:
+        Fibonacci_2, Fibonacci_1 = Fibonacci_2 + Fibonacci_1, Fibonacci_2
+        set_Fibonacci.add(Fibonacci_2)
+        if Fibonacci_2 > max_number:
             break
-    
-    set_Fibonacci = set(list_Fibonacci)
     
     for i in range(len(A)):
         if A[i] in set_Fibonacci:

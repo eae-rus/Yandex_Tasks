@@ -1,8 +1,13 @@
-import gmpy2
-
 def main():
     '''
     '''
+    def find_remainder(number_str, divisor):
+        remainder = 0
+        for digit in number_str:
+            digit_value = int(digit)
+            remainder = (remainder * 10 + digit_value) % divisor
+        return remainder
+    
     mods = [10**9 + 7, 10**9 + 11, 10**9 + 13]
     max_Fibonachi_count = 40000
     
@@ -21,14 +26,12 @@ def main():
     N = int(input())
 
     answer = []
-    gmpy2.set_context(gmpy2.context(precision=5000)) 
     
     for i in range(N):
         number_str = input()
-        number = gmpy2.mpz(number_str)
         is_Fibonachi = True
         for i in range(len(mods)):
-            remainder = gmpy2.f_mod(number, mods[i])
+            remainder = find_remainder(number_str, mods[i])
             if remainder not in used_hash[i]:
                 is_Fibonachi = False
                 break

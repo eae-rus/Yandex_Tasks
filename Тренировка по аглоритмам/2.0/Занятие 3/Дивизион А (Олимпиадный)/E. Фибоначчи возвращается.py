@@ -21,9 +21,9 @@ def main():
     
     for i in range(len(A)):
         if A[i] in set_Fibonacci:
-            print('YES')
+            print('Yes')
         else:
-            print('NO')
+            print('No')
     
 if __name__ == '__main__':
 	main()

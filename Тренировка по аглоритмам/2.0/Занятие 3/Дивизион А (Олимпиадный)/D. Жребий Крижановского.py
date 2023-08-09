@@ -28,11 +28,7 @@ def main():
     for i in numbers_players_list:
         A[i] += 1
     
-    max_number = max(numbers_players_list)
-    if max_number < 100:
-        max_number += 1
-        
-    for i in range(max_number, 0, -1):
+    for i in range(100, 0, -1):
         A[i] += 1
         numbers_players_list.append(i)
         min_i = find_min_number(A)
@@ -51,9 +47,6 @@ def main():
         A[i] -= 1
     
     print(min_number)
-    
-
-    
 
     
 if __name__ == '__main__':

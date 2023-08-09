@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 def main():
     '''
     '''
@@ -5,7 +7,7 @@ def main():
 
     A = [0] * N
     for i in range(N):
-        A[i] = int(input())
+        A[i] = Decimal(input())
         
     max_number = max(A)
     

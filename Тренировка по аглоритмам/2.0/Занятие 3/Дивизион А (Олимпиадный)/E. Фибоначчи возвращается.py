@@ -1,4 +1,4 @@
-from decimal import Decimal
+import gmpy2
 
 def main():
     '''
@@ -21,12 +21,15 @@ def main():
     N = int(input())
 
     answer = []
-
+    gmpy2.set_context(gmpy2.context(precision=5000)) 
+    
     for i in range(N):
-        number = Decimal(input())
+        number_str = input()
+        number = gmpy2.mpz(number_str)
         is_Fibonachi = True
         for i in range(len(mods)):
-            if number % mods[i] not in used_hash[i]:
+            remainder = gmpy2.f_mod(number, mods[i])
+            if remainder not in used_hash[i]:
                 is_Fibonachi = False
                 break
         if is_Fibonachi:

@@ -2,7 +2,7 @@ def main():
     '''
     '''
     def find_min_number(A):
-        for i in range(0, 100):
+        for i in range(0, len(A)):
             if A[i] == 1:
                 return i
         return -1
@@ -24,11 +24,11 @@ def main():
     count_players_lower = 0
     min_number = 101
     
-    A = [0] * 101
+    A = [0] * 102
     for i in numbers_players_list:
         A[i] += 1
     
-    for i in range(100, 0, -1):
+    for i in range(101, 0, -1):
         A[i] += 1
         numbers_players_list.append(i)
         min_i = find_min_number(A)

@@ -10,19 +10,25 @@ def main():
         else:
             stones_dict[stone] += 1
     
-    beautiful_couples_dict = {}
+    beautiful_couples_set = set()
     for _ in range(K):
         beautiful_couples = input()
+        beautiful_couples_set.add(beautiful_couples)
+        
+    beautiful_couples_dict = {}
+    for beautiful_couples in beautiful_couples_set:
         if beautiful_couples[0] not in beautiful_couples_dict:
             beautiful_couples_dict[beautiful_couples[0]] = []
         beautiful_couples_dict[beautiful_couples[0]].append(beautiful_couples[1])
     
     answer = 0
     for i in range(N-1):
-        stones_dict[precious_stones[i]] -= 1
-        if precious_stones[i] in beautiful_couples_dict:
-            for stone in beautiful_couples_dict[precious_stones[i]]:
-                answer += stones_dict[stone]
+        left_stone = precious_stones[i]
+        stones_dict[left_stone] -= 1
+        if left_stone in beautiful_couples_dict:
+            for right_stone in beautiful_couples_dict[left_stone]:
+                if right_stone in stones_dict:
+                    answer += stones_dict[right_stone]
     
     print(answer)
 

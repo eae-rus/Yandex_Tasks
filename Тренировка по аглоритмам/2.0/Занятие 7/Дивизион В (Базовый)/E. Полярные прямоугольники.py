@@ -4,7 +4,7 @@ def main():
     '''
     '''
     N = int(input())
-    r1_max, r2_min = 0, (1+10^6)
+    r1_max, r2_min = 0, (1 + 10**6)
     
     events = []
     for _ in range(N):

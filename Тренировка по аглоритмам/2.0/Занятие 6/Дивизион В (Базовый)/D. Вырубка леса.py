@@ -3,8 +3,8 @@ def main():
     '''
     cutting_down_trees_1, rest_1, cutting_down_trees_2, rest_2, sum_trees = map(int, input().split())
     
-    left = 1
-    right = 3 + sum_trees // (cutting_down_trees_1 * (1-1/rest_1) + cutting_down_trees_2 * (1-1/rest_2))
+    left = -1000 + sum_trees // (cutting_down_trees_1 * (1-1/rest_1) + cutting_down_trees_2 * (1-1/rest_2))
+    right = 1000 + sum_trees // (cutting_down_trees_1 * (1-1/rest_1) + cutting_down_trees_2 * (1-1/rest_2))
     
     while left < right:
         mid = (left + right) // 2

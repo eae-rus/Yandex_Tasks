@@ -14,17 +14,15 @@ def main():
         event.append((cat, 0, -1))
     
     event = sorted(event)
-    count_line = [0,0] * m
+    count_line = [[0,0] for _ in range(n)]
     сount_cat = 0
     for event_i in event:
         if event_i[1] == -1: # начало
-            count_line[event_i[2]] = сount_cat
-        
-        if event_i[1] == 0: # кот
-            сount_cat += 1
-        
-        if event_i[1] == 1: # конец
-            count_line[event_i[2]] = сount_cat
+            count_line[event_i[2]][0] = сount_cat
+        elif event_i[1] == 0: # кот
+            сount_cat += 1        
+        elif event_i[1] == 1: # конец
+            count_line[event_i[2]][1] = сount_cat
     
     for i in range(m):
         count_line[i] = count_line[i][1] - count_line[i][0]

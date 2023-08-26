@@ -3,7 +3,6 @@ def main():
     '''
     n,m = map(int, input().split())
     a = list(map(int, input().split()))
-    a = sorted(a)
     
     event = []
     for i in range(m):

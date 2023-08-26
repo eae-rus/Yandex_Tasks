@@ -18,30 +18,23 @@ def main():
     events = sorted(events)
     
     new_array = []
-    is_no_solution = False
     max_right = 0
-    max_right_line = (0,0)
-    if len(events) == 0:
-        is_no_solution = True
-    else:
-        max_right_line = events[0]
+    now_best = (0,0)
         
     for event in events:
-        if event[0] <= max_right:
-            if event[1] > max_right_line[1]:
-                max_right_line = event
-        else:
-            if event[0] > max_right_line[1]:
-                is_no_solution = True
+        if event[0] > max_right:
+            new_array.append(now_best)
+            max_right = now_best[1]
+            if max_right >= M:
                 break
-            else:
-                max_right = max_right_line[1]
-                new_array.append(max_right_line)
-                max_right_line = event
+        if event[0] <= max_right and event[1] > now_best[1]:
+            now_best = event
 
-    new_array.append(max_right_line)
+    if max_right < M:
+        new_array.append(now_best)
 
-    if is_no_solution or len(new_array) == 0:
+
+    if max_right < M:
         print('No solution')
     else:
         print(len(new_array))

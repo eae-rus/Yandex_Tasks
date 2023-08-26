@@ -20,7 +20,12 @@ def main():
     new_array = []
     is_no_solution = False
     max_right = 0
-    max_right_line = events[0]
+    max_right_line = (0,0)
+    if len(events) == 0:
+        is_no_solution = True
+    else:
+        max_right_line = events[0]
+        
     for event in events:
         if event[0] <= max_right:
             if event[1] > max_right_line[1]:

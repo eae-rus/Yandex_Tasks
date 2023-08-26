@@ -32,7 +32,7 @@ def main():
 
     if max_right < M:
         new_array.append(now_best)
-
+        max_right = now_best[1]
 
     if max_right < M:
         print('No solution')

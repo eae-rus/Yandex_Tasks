@@ -1,10 +1,12 @@
+from decimal import Decimal
+
 def main():
     '''
     '''
     cutting_down_trees_1, rest_1, cutting_down_trees_2, rest_2, sum_trees = map(int, input().split())
     
-    left = -3 + sum_trees // (cutting_down_trees_1 * (1-1/rest_1) + cutting_down_trees_2 * (1-1/rest_2))
-    right = 3 + sum_trees // (cutting_down_trees_1 * (1-1/rest_1) + cutting_down_trees_2 * (1-1/rest_2))
+    left = Decimal('-3') + sum_trees // (cutting_down_trees_1 * (1-Decimal('1')/rest_1) + cutting_down_trees_2 * (1-Decimal('1')/rest_2))
+    right =Decimal('3') + sum_trees // (cutting_down_trees_1 * (1-Decimal('1')/rest_1) + cutting_down_trees_2 * (1-Decimal('1')/rest_2))
     
     while left < right:
         mid = (left + right) // 2

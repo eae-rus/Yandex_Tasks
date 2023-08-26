@@ -14,20 +14,21 @@ def main():
         event.append((cat, 0, -1))
     
     event = sorted(event)
-    count_line = [0] * m
-    
-    line_set = set()
+    count_line = [0,0] * m
+    сount_cat = 0
     for event_i in event:
         if event_i[1] == -1: # начало
-            line_set.add(event_i[2])
+            count_line[event_i[2]] = сount_cat
         
         if event_i[1] == 0: # кот
-            for i in line_set:
-                count_line[i] += 1
+            сount_cat += 1
         
         if event_i[1] == 1: # конец
-            line_set.remove(event_i[2])
+            count_line[event_i[2]] = сount_cat
     
+    for i in range(m):
+        count_line[i] = count_line[i][1] - count_line[i][0]
+        
     print(' '.join(map(str, count_line)))
     
 if __name__ == '__main__':

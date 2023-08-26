@@ -51,8 +51,11 @@ def main():
         # небольшой костыль на предыдущем алгоритме
         left = find_min_index(array, number)
         if left == -1:
-            print(0,0)
-            continue
+            if array[left + 1] == number:
+                l = left + 1
+            else:
+                print(0,0)
+                continue
         else:
             if array[left] == number:
                 l = left

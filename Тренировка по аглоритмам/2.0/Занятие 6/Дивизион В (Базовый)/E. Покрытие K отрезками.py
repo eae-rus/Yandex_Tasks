@@ -20,16 +20,10 @@ def main():
     while left < right:
         line = (left + right) // 2
         count_line = find_min_k(x, line)
-        if count_line < k:
-            right = line - 1
-        elif count_line == k:
-            if find_min_k(x, line-1) == k:
-                right = line - 1
-            else:
-                left = line
-                right = line
+        if count_line <= k:
+            right = line
         else:
-            left = line
+            left = line + 1
 
     print(right)
     

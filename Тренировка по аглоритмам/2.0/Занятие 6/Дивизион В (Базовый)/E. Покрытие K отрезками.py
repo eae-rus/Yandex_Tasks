@@ -3,11 +3,11 @@ def main():
     '''
     def find_min_k(x, line):
         count_line = 1
-        left = x[0]
+        max_right = x[0] + line
         for x_i in x[1:]:
-            if x_i - left > line:
+            if x_i > max_right:
                 count_line += 1
-                left = x_i
+                max_right = x_i + line
         
         return count_line
 
@@ -17,17 +17,21 @@ def main():
     
     left = 0
     right = x[-1] - x[0]
-    while left < right - 1:
-        mid = (left + right) // 2
-        if find_min_k(x, mid) > k:
-            left = mid
+    while left < right:
+        line = (left + right) // 2
+        count_line = find_min_k(x, line)
+        if count_line < k:
+            right = line - 1
+        elif count_line == k:
+            if find_min_k(x, line-1) == k:
+                right = line - 1
+            else:
+                left = line
+                right = line
         else:
-            right = mid
+            left = line
 
-    if find_min_k(x, left) == k:
-        print(left)
-    else:
-        print(right)
+    print(right)
     
 if __name__ == '__main__':
 	main()

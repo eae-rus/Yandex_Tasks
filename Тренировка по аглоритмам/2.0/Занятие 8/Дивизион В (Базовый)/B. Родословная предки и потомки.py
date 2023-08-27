@@ -37,12 +37,20 @@ def main():
     descendant, parent = input().split()
     descendant_tree = [descendant, []]
     tree = [parent, [descendant_tree]]
+    not_found_set = set()
     for i in range(N-2):
         descendant, parent = input().split()
         if add_descendant(tree, parent, descendant):
             continue
         else:
-            print("ERROR")
+            not_found_set.add((descendant, parent))
+    
+    i = 0
+    while i < 1000 and not_found_set:
+        i += 1
+        for descendant, parent in list(not_found_set):
+            add_descendant(tree, parent, descendant)
+            not_found_set.remove((descendant, parent))
     
     answer = []
     query = sys.stdin.readline()[0:-1].split(" ")

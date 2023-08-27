@@ -59,7 +59,7 @@ def main():
     while i < 1000 and not_found_set:
         i += 1
         for descendant, parent in list(not_found_set):
-            if add_descendant(tree, parent, descendant)
+            if add_descendant(tree, parent, descendant):
                 not_found_set.remove((descendant, parent))
     
     answer = []

@@ -9,7 +9,6 @@ def main():
         descendant, parent = input().split()
         child_to_parant_dict[descendant] = parent     
 
-    answer = []
     query = sys.stdin.readline()[0:-1].split(" ")
     while not (query == ""):
         try:
@@ -28,10 +27,8 @@ def main():
         while parent_i not in ancestors:
             parent_i = child_to_parant_dict[parent_i]
             
-        answer.append(parent_i)
+        print(parent_i)
         query = sys.stdin.readline()[0:-1].split(" ")
-        
-    print(' '.join(map(str, answer)))
      
 if __name__ == '__main__':
 	main()

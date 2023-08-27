@@ -1,3 +1,5 @@
+import sys
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -28,9 +30,9 @@ def print_tree(root, depth=0):
     print_tree(root.right, depth + 1)
 
 root = None
+query = sys.stdin.readline()[0:-1].split(" ")
 
-while True:
-    query = input().split()
+while not (query[0] == ""):
     if query[0] == "ADD":
         value = int(query[1])
         if search(root, value):
@@ -46,3 +48,5 @@ while True:
             print("NO")
     elif query[0] == "PRINTTREE":
         print_tree(root)
+        
+    query = sys.stdin.readline()[0:-1].split(" ")

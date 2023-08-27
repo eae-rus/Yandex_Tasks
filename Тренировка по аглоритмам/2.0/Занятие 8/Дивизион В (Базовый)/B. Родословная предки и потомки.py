@@ -11,18 +11,16 @@ def main():
     def create_tree(parent, parant_child_dict):
         tree = [parent, []]
         for descendant in parant_child_dict[parent]:
-            descendant_tree = [descendant, add_descendant(descendant, parant_child_dict)]
-            tree[1].append(descendant_tree)
+            tree[1].append(add_descendant(descendant, parant_child_dict))
         return tree
     
     def add_descendant(parent, parant_child_dict):
         if not (parent in parant_child_dict):
-            return []
+            return [parent, []]
         else:
             tree = [parent, []]
             for descendant in parant_child_dict[parent]:
-                descendant_tree = [descendant, add_descendant(descendant, parant_child_dict)]
-                tree[1].append(descendant_tree)
+                tree[1].append(add_descendant(descendant, parant_child_dict))
             return tree
     
     def find_parant(tree, parent):

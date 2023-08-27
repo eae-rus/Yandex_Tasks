@@ -3,27 +3,27 @@ import sys
 def main():
     '''
     '''
-    def find_first_parant(not_found_set):
-        not_found_list = list(not_found_set)
-        for i in range(len(not_found_list)):
-            is_parent = True
-            for k in range(len(not_found_list)):
-                if not_found_list[i][1] == not_found_list[k][0]:
-                    is_parent = False
-                    break
-            if is_parent:
-                return not_found_list[i]
+    def find_first_parant(parant_set, descendant_set):
+        for parent in parant_set:
+            if not (parent in descendant_set):
+                return parent
     
-    def add_descendant(tree, parent, descendant):
-        if parent == tree[0]:
-            descendant_tree = [descendant, []]
+    def create_tree(parent, parant_child_dict):
+        tree = [parent, []]
+        for descendant in parant_child_dict[parent]:
+            descendant_tree = [descendant, add_descendant(descendant, parant_child_dict)]
             tree[1].append(descendant_tree)
-            return True
+        return tree
+    
+    def add_descendant(parent, parant_child_dict):
+        if not (parent in parant_child_dict):
+            return []
         else:
-            for child in tree[1]:
-                if add_descendant(child, parent, descendant):
-                    return True
-            return False
+            tree = [parent, []]
+            for descendant in parant_child_dict[parent]:
+                descendant_tree = [descendant, add_descendant(descendant, parant_child_dict)]
+                tree[1].append(descendant_tree)
+            return tree
     
     def find_parant(tree, parent):
         if parent == tree[0]:
@@ -45,23 +45,21 @@ def main():
             return False
     
     N = int(input())
-    not_found_set = set()
+    parant_child_dict = {}
+    descendant_set = set()
+    parent_set = set()
     for i in range(N-1):
         descendant, parent = input().split()
-        not_found_set.add((descendant, parent))
+        descendant_set.add(descendant)
+        parent_set.add(parent)
+        
+        if parent not in parant_child_dict:
+            parant_child_dict[parent] = []
+        parant_child_dict[parent].append(descendant)        
 
-    descendant, parent = find_first_parant(not_found_set)
-    descendant_tree = [descendant, []]
-    tree = [parent, [descendant_tree]]
-    not_found_set.remove((descendant, parent))
-    
-    i = 0
-    while i < 1000 and not_found_set:
-        i += 1
-        for descendant, parent in list(not_found_set):
-            if add_descendant(tree, parent, descendant):
-                not_found_set.remove((descendant, parent))
-    
+    parent = find_first_parant(parent_set, descendant_set)
+    tree = create_tree(parent, parant_child_dict)
+
     answer = []
     query = sys.stdin.readline()[0:-1].split(" ")
     while not (query == ""):

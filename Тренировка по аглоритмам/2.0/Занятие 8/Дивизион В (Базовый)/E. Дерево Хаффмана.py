@@ -13,11 +13,7 @@ def main():
             huffman_codes.append(code)
             return
         else: # D
-            if code == "0": # наверное и не нужно (надо уточнить логику кодировки)
-                create_tree(huffman_codes, "0", h_s_s)
-            else:
-                create_tree(huffman_codes, code + "0", h_s_s)
-                
+            create_tree(huffman_codes, code + "0", h_s_s)
             create_tree(huffman_codes, code + "1", h_s_s)
             
     

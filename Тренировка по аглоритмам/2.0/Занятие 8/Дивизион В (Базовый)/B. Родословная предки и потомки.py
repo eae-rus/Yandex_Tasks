@@ -3,6 +3,17 @@ import sys
 def main():
     '''
     '''
+    def find_first_parant(not_found_set):
+        not_found_list = list(not_found_set)
+        for i in range(len(not_found_list)):
+            is_parent = True
+            for k in range(len(not_found_list)):
+                if not_found_list[i][1] == not_found_list[k][0]:
+                    is_parent = False
+                    break
+            if is_parent:
+                return not_found_list[i]
+    
     def add_descendant(tree, parent, descendant):
         if parent == tree[0]:
             descendant_tree = [descendant, []]
@@ -34,16 +45,15 @@ def main():
             return False
     
     N = int(input())
-    descendant, parent = input().split()
+    not_found_set = set()
+    for i in range(N-1):
+        descendant, parent = input().split()
+        not_found_set.add((descendant, parent))
+
+    descendant, parent = find_first_parant(not_found_set)
     descendant_tree = [descendant, []]
     tree = [parent, [descendant_tree]]
-    not_found_set = set()
-    for i in range(N-2):
-        descendant, parent = input().split()
-        if add_descendant(tree, parent, descendant):
-            continue
-        else:
-            not_found_set.add((descendant, parent))
+    not_found_set.remove((descendant, parent))
     
     i = 0
     while i < 1000 and not_found_set:

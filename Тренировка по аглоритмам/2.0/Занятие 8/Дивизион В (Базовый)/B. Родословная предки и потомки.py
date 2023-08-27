@@ -67,13 +67,13 @@ def main():
             break
         
         new_tree = find_parant(tree, parent)
-        if find_descendant(new_tree, descendant):
+        if new_tree is not None and find_descendant(new_tree, descendant):
             answer.append(2)
             query = sys.stdin.readline()[0:-1].split(" ")
             continue
         
         new_tree = find_parant(tree, descendant)
-        if find_descendant(new_tree, parent):
+        if new_tree is not None and find_descendant(new_tree, parent):
             answer.append(1)
             query = sys.stdin.readline()[0:-1].split(" ")
             continue

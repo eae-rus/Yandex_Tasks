@@ -1,15 +1,20 @@
+import sys
+import string
+
 def main():
     '''
     '''
     k = int(input())
-    stroke = input()
-    characters = set(stroke)
-    
+    stroke = sys.stdin.readline()
+    characters = list(string.ascii_lowercase)
+
     max_beauty = 0
     for char in characters:
         left, right = 0, 0
         use_k = 0
-        while left < len(stroke) and right < len(stroke):
+        while left < len(stroke):
+            if right < left:
+                right = left
             while right < len(stroke):
                 if stroke[right] != char:
                     if use_k >= k:

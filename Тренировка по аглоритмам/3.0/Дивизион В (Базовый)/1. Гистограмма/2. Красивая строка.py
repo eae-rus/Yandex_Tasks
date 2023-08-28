@@ -10,9 +10,6 @@ def main():
         left, right = 0, 0
         use_k = 0
         while left < len(stroke) and right < len(stroke):
-            if left > right:
-                right = left
-                
             while right < len(stroke):
                 if stroke[right] != char:
                     if use_k >= k:

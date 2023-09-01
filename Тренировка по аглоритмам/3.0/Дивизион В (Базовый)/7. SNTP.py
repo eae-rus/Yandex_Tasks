@@ -27,6 +27,14 @@ def main():
     coorect_time -= coorect_time_ss
     if coorect_time >= 0.5:
         coorect_time_ss += 1
+        if coorect_time_ss == 60:
+            coorect_time_ss = 0
+            coorect_time_mm += 1
+            if coorect_time_mm == 60:
+                coorect_time_mm = 0
+                coorect_time_hh += 1
+                if coorect_time_hh == 24:
+                    coorect_time_hh = 0
     
     answer = []
     for time in [coorect_time_hh, coorect_time_mm, coorect_time_ss]:

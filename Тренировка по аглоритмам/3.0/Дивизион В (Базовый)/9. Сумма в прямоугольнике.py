@@ -2,7 +2,7 @@ def main():
     '''
     '''
     N, M, K = map(int, input().split())
-    matrix = [[0] * (N+1)]
+    matrix = [[0] * (M+1)]
     for _ in range(N):
         array = [0]
         for x in list(map(int, input().split())):

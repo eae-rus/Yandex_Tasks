@@ -14,7 +14,10 @@ def main():
             else:
                 print("error")
         elif command[0] == 'back':
-            print(stack[-1])
+            if len(stack) != 0:
+                print(stack[-1])
+            else:
+                print("error")
         elif command[0] == 'size':
             print(len(stack))
         elif command[0] == 'clear':

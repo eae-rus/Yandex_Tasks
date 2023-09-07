@@ -21,7 +21,9 @@ def main():
             else:
                 answer = 'no'
                 break
-        
+    if len(stack) != 0:
+        answer = 'no'
+    
     print(answer)
     
         

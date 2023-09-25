@@ -20,7 +20,7 @@ def main():
                     is_real = False
                     break
                 
-            if not is_real or not stack_vagon:
+            if not is_real:
                 break
             stack_vagon.append(vagon)
 

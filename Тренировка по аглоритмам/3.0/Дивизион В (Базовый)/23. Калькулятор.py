@@ -7,6 +7,9 @@ def main():
         if N % 3 == 0:
             N = N // 3
             array.append(N)
+        elif (N - 1) % 3 == 0:
+            N = N - 1
+            array.append(N)
         elif N % 2 == 0:
             N = N // 2
             array.append(N)

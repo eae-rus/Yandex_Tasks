@@ -1,15 +1,15 @@
 def main():
-    def min_len_thread(n, carnations):
-        if n == 0 or n == 1:
-            return carnations[1] - carnations[0]
-        
-        return min(min_len_thread(n-1, carnations), min_len_thread(n-2, carnations)) + (carnations[n] - carnations[n-1])
-    
     N = int(input())
     carnations = list(map(int, input().split()))
     carnations.sort()
+    min_len_thread = [0] * N
+    min_len_thread[0] = carnations[1] - carnations[0]
+    min_len_thread[1] = min_len_thread[0]
+    for i in range(2, N):
+        min_len_thread[i] = min(min_len_thread[i-1], min_len_thread[i-2]) + carnations[i] - carnations[i-1]
+
         
-    print(min_len_thread(N-1, carnations))
+    print(min_len_thread[-1])
     
         
 if __name__ == '__main__':

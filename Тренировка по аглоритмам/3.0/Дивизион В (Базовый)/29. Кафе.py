@@ -69,6 +69,7 @@ def main():
 
     print(min_cost)  
     print(remaining_coupons, used_coupons)
+    days_use_coupons = days_use_coupons[::-1]
     for day in days_use_coupons:
         print(day)
     

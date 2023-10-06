@@ -11,7 +11,7 @@ def main():
         print("0 0")
         return
     if N == 1:
-        print(1)
+        print(cost_arr[0])
         if cost_arr[0] > 100:
             print("1 0")
         else:
@@ -69,9 +69,8 @@ def main():
 
     print(min_cost)  
     print(remaining_coupons, used_coupons)
-    days_use_coupons = days_use_coupons[::-1]
-    for day in days_use_coupons:
-        print(day)
+    for i in range(1, used_coupons+1):
+        print(days_use_coupons[-i])
     
         
 if __name__ == '__main__':

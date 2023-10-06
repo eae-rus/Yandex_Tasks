@@ -29,18 +29,8 @@ def main():
                     
     subsequence = []
     i, j = N-1, M-1
-    while i >= 0 and j >= 0:
-        if i == 0:
-            if j != 0 and dp[i][j] == dp[i][j-1]+1:
-                subsequence.append(sequence_1[i])
-                break
-            elif j == 0:
-                if dp[0][0] == 1:
-                    subsequence.append(sequence_1[i])
-                break
-            else:
-                j -= 1
-        elif dp[i][j] == dp[i-1][j-1] + 1:
+    while i > 0 and j > 0:
+        if dp[i][j] == dp[i-1][j-1] + 1:
             subsequence.append(sequence_1[i])
             i -= 1
             j -= 1
@@ -48,6 +38,10 @@ def main():
             i -= 1
         else:
             j -= 1
+    if i == 0 and dp[0][j] == 1:
+        subsequence.append[sequence_1[0]]
+    elif j == 0 and dp[i][0] == 1:
+        subsequence.append[sequence_2[0]]
         
     subsequence.reverse()
             

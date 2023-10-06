@@ -49,7 +49,7 @@ def main():
     min_cost = max_cost
     remaining_coupons = 0
     for variant in range(N+1): # FIXME: можно написать в обратном порядке с прерыванием
-        if calculate_cost[N][variant] < min_cost:
+        if calculate_cost[N][variant] <= min_cost:
             min_cost = calculate_cost[N][variant]
             remaining_coupons = variant
 

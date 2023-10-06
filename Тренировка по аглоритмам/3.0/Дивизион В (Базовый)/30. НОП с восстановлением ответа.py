@@ -9,17 +9,17 @@ def main():
     for i in range(N):
         for j in range(M):
             if i == 0 and j == 0:
-                if sequence_1[i] == sequence_2[j]:
+                if sequence_1[0] == sequence_2[0]:
                     dp[0][0] = 1
             elif i == 0:
                 if dp[0][j-1] == 1:
                     dp[0][j] = 1
-                elif sequence_1[i] == sequence_2[j]:
+                elif sequence_1[0] == sequence_2[j]:
                     dp[0][j] = 1
             elif j == 0:
                 if dp[i-1][0] == 1:
                     dp[i][0] = 1
-                elif sequence_1[i] == sequence_2[j]:
+                elif sequence_1[i] == sequence_2[0]:
                     dp[i][0] = 1
             else:
                 if sequence_1[i] == sequence_2[j]:
@@ -34,7 +34,9 @@ def main():
     for i in range(N-1,0,-1):
         if dp[i-1][0] < dp[i][0]:
             subsequence.append(sequence_1[i])
-            
+    if sequence_1[0] == sequence_2[0]:
+        subsequence.append(sequence_1[0])
+        
     subsequence.reverse()
             
     #print(dp[N-1][M-1])

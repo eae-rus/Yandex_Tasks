@@ -28,14 +28,26 @@ def main():
                     dp[i][j] = max(dp[i-1][j], dp[i][j-1])
                     
     subsequence = []
-    for j in range(M-1,0,-1):
-        if dp[N-1][j-1] < dp[N-1][j]:
-            subsequence.append(sequence_2[j])
-    for i in range(N-1,0,-1):
-        if dp[i-1][0] < dp[i][0]:
+    i, j = N-1, M-1
+    while i >= 0 and j >= 0:
+        if i == 0:
+            if j != 0 and dp[i][j] == dp[i][j-1]+1:
+                subsequence.append(sequence_1[i])
+                break
+            elif j == 0:
+                if dp[0][0] == 1:
+                    subsequence.append(sequence_1[i])
+                break
+            else:
+                j -= 1
+        elif dp[i][j] == dp[i-1][j-1] + 1:
             subsequence.append(sequence_1[i])
-    if sequence_1[0] == sequence_2[0]:
-        subsequence.append(sequence_1[0])
+            i -= 1
+            j -= 1
+        elif i != 0 and dp[i][j] == dp[i-1][j]:
+            i -= 1
+        else:
+            j -= 1
         
     subsequence.reverse()
             

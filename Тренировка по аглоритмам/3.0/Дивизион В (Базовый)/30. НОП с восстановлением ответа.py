@@ -41,7 +41,7 @@ def main():
     if i == 0 and dp[0][j] == 1:
         subsequence.append(sequence_1[0])
     elif j == 0 and dp[i][0] == 1:
-        subsequence.append(sequence_1[0])
+        subsequence.append(sequence_2[0])
         
     subsequence.reverse()
             

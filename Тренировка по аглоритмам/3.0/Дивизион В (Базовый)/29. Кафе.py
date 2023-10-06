@@ -69,7 +69,8 @@ def main():
 
     print(min_cost)  
     print(remaining_coupons, used_coupons)
-    print(" ".join(map(str, days_use_coupons)))
+    for day in days_use_coupons:
+        print(day)
     
         
 if __name__ == '__main__':

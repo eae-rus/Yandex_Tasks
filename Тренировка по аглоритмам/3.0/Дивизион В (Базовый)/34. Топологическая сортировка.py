@@ -3,13 +3,15 @@ def main():
     
     graph = {i: [] for i in range(1, N+1)}
     visited_count = {i: 0 for i in range(1, N+1)}
+    is_cycle_found = False
     for _ in range(M):
         node_1, node_2 = list(map(int, input().split()))
         if node_1 != node_2:
             graph[node_1].append(node_2)
             visited_count[node_2] += 1
-        
-    is_cycle_found = False
+        else:
+            is_cycle_found = True
+    
     topologized_graph = []
     while len(graph) > 0 and not is_cycle_found:
         is_cycle_found = True

@@ -30,14 +30,15 @@ def main():
     subsequence = []
     i, j = N-1, M-1
     while i > 0 and j > 0:
-        if dp[i][j] == dp[i-1][j-1] + 1:
+        if dp[i][j] == dp[i][j-1]:
+            j -= 1
+        elif dp[i][j] == dp[i-1][j]:
+            i -= 1
+        else: #dp[i][j] == dp[i-1][j-1] + 1:
             subsequence.append(sequence_1[i])
             i -= 1
             j -= 1
-        elif i != 0 and dp[i][j] == dp[i-1][j]:
-            i -= 1
-        else:
-            j -= 1
+            
     if i == 0 and dp[0][j] == 1:
         subsequence.append(sequence_1[0])
     elif j == 0 and dp[i][0] == 1:

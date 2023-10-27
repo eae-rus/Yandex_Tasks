@@ -3,15 +3,15 @@ import sys
 sys.setrecursionlimit(100000+100)
 
 def main():
-    def dfs(graph, node, visited, path):
+    def dfs(graph, node, previous_node, visited, path):
         visited[node] = True
         path.append(node)
 
         for next_node in graph[node]:
             if not visited[next_node]:
-                if dfs(graph, next_node, visited, path):
+                if dfs(graph, next_node, node, visited, path):
                     return True
-            elif next_node in path:
+            elif previous_node != next_node and next_node in path:
                 # Найден цикл
                 return True
 
@@ -30,7 +30,7 @@ def main():
     visited = [False for _ in range(N+1)]
     for i in range(1, N+1):
         if not visited[i]:
-            if dfs(graph, i, visited, []):
+            if dfs(graph, i, 0, visited, []):
                 is_cycle_found = True
                 break
 

@@ -3,11 +3,12 @@ import sys
 sys.setrecursionlimit(100000+100)
 
 def main():
-    def dfs(graph, node, visited):
+    def dfs(graph, node, visited, local_visited):
         visited[node] = True
+        local_visited.append(node)
         for next_node in graph[node]:
             if not visited[next_node]:
-                dfs(graph, next_node, visited)
+                dfs(graph, next_node, visited, local_visited)
     
     N, M = list(map(int, input().split()))
     graph = [[] for _ in range(N+1)]
@@ -19,20 +20,17 @@ def main():
     
     all_CC_count = [] # connectivity_components (CC)
     all_CC = [] # connectivity_components (CC)
-    all_visited = [False for _ in range(N+1)]
+    visited = [False for _ in range(N+1)]
     for i in range(1, N+1):
-        if not all_visited[i]:
-            visited = [False for _ in range(N+1)]
-            if not visited[i]:
-                dfs(graph, i, visited)
+        if not visited[i]:
+            local_visited = []
+            dfs(graph, i, visited, local_visited)
 
             connectivity_components_count = 0
             connectivity_components = []
-            for i in range(1, N+1):
-                if visited[i]:
-                    all_visited[i] = True
-                    connectivity_components.append(i)
-                    connectivity_components_count += 1
+            for node in local_visited:
+                connectivity_components.append(node)
+                connectivity_components_count += 1
             
             all_CC_count.append(connectivity_components_count)
             all_CC.append(connectivity_components)

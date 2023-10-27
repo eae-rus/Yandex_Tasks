@@ -27,7 +27,8 @@ def main():
     for i in range(1, N+1):
         if not visited[i]:
             is_cycle_found = dfs(graph, i, 0, visited, False)
-
+            if is_cycle_found:
+                break
 
     if is_cycle_found:
         print("NO")

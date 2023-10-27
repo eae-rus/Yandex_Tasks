@@ -1,3 +1,5 @@
+import sys
+
 def main():
     def dfs(graph, node, visited):
         visited[node] = True
@@ -6,6 +8,8 @@ def main():
                 dfs(graph, next_node, visited)
     
     N, M = list(map(int, input().split()))
+    # Установить новое значение глубины рекурсии на 10000
+    sys.setrecursionlimit(M+1)
     graph = [[] for _ in range(N+1)]
     for _ in range(M):
         node_1, node_2 = list(map(int, input().split()))

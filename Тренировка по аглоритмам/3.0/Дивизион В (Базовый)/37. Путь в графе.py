@@ -36,6 +36,7 @@ def main():
                     way.append(i)
                     node = i
                     distance -= 1
+                    break
         print(" ".join(map(str, way[::-1])))
         
 if __name__ == '__main__':

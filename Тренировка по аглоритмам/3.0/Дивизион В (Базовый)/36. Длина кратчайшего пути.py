@@ -10,6 +10,7 @@ def main():
                 
     start_node, end_node = list(map(int, input().split()))
     distance_visited = [-1 for _ in range(n+1)]
+    distance_visited[start_node] = 0
     distance = 1
     next_visited = set()
     now_visited = set(graph[start_node])

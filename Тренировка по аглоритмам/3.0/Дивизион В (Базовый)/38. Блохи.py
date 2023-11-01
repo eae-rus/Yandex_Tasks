@@ -1,23 +1,16 @@
 def main():
-    def calculate_jump_1(node, variant):
-        if variant == 1:
-            return [node[0] - 2, node[1] + 1]
-        elif variant == 2:
-            return [node[0] - 2, node[1] - 1]
-        elif variant == 3:
-            return [node[0] - 1, node[1] - 2]
-        elif variant == 4:
-            return [node[0] + 1, node[1] - 2]
-        elif variant == 5:
-            return [node[0] + 2, node[1] - 1]
-        elif variant == 6:
-            return [node[0] + 2, node[1] + 1]
-        elif variant == 7:
-            return [node[0] + 1, node[1] + 2]
-        elif variant == 8:
-            return [node[0] - 1, node[1] + 2]
-        else:
-            return [node[0], node[1]]
+    def calculate_jump(node, variant):
+        variants = {
+            1: [node[0] - 2, node[1] + 1],
+            2: [node[0] - 2, node[1] - 1],
+            3: [node[0] - 1, node[1] - 2],
+            4: [node[0] + 1, node[1] - 2],
+            5: [node[0] + 2, node[1] - 1],
+            6: [node[0] + 2, node[1] + 1],
+            7: [node[0] + 1, node[1] + 2],
+            8: [node[0] - 1, node[1] + 2]
+        }
+        return variants.get(variant, [node[0], node[1]])
         
     def is_valid_node(X, Y, N, M, visited_nodes):
         if X > 0 and X <= N and Y > 0 and Y <= M:
@@ -51,7 +44,7 @@ def main():
             for k in range(len(now_visited)):
                 node = now_visited[k]
                 for variant in range(1, 9):
-                    jump = calculate_jump_1(node, variant)
+                    jump = calculate_jump(node, variant)
                     if is_valid_node(jump[0], jump[1], N, M, visited_nodes):
                         next_visited.append(jump)
                         

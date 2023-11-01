@@ -20,47 +20,37 @@ def main():
         return False
     
     N, M, feeder_X, feeder_Y, Q  = list(map(int, input().split()))
-    all_distance = 0
     
-    fleas = []
+    # считаем путь от кормушки до всех точек
+    visited_nodes = [[False for _ in range(M+1)] for _ in range(N+1)]
+    visited_distance = [[-1 for _ in range(M+1)] for _ in range(N+1)]
+    visited_nodes[feeder_X][feeder_Y] = True
+    visited_distance[feeder_X][feeder_Y] = 0
+    distance = 1
+    now_visited = []
+    now_visited.append([feeder_X, feeder_Y])
+    while len(now_visited) > 0:
+        next_visited = []
+        for k in range(len(now_visited)):
+            node = now_visited[k]
+            for variant in range(1, 9):
+                jump = calculate_jump(node, variant)
+                if is_valid_node(jump[0], jump[1], N, M, visited_nodes):
+                    next_visited.append(jump)
+                    visited_distance[jump[0]][jump[1]] = distance
+        now_visited = next_visited
+        distance += 1
+
+    # считаем суммарный путь от блох точек до кормушки
+    all_distance = 0
+    is_valid = True
     for _ in range(Q):
         fleas_X, fleas_Y = list(map(int, input().split()))
-        fleas.append([fleas_X, fleas_Y])
-    
-    for i in range(Q):
-        fleas_X, fleas_Y = fleas[i][0], fleas[i][1]
-        if fleas_X == feeder_X and fleas_Y == feeder_Y:
-            continue
-
-        visited_nodes = [[False for _ in range(M+1)] for _ in range(N+1)]
-        visited_nodes[fleas_X][fleas_Y] = True
-        
-        distance = 1
-        now_visited = []
-        now_visited.append([feeder_X, feeder_Y])
-        is_feeder_found = False
-        while len(now_visited) > 0 and not is_feeder_found:
-            next_visited = []
-            for k in range(len(now_visited)):
-                node = now_visited[k]
-                for variant in range(1, 9):
-                    jump = calculate_jump(node, variant)
-                    if is_valid_node(jump[0], jump[1], N, M, visited_nodes):
-                        next_visited.append(jump)
-                        
-                    if jump[0] == fleas_X and jump[1] == fleas_Y:
-                        all_distance += distance
-                        is_feeder_found = True
-                        break
-                if is_feeder_found:
-                    break
-            now_visited = next_visited
-            distance += 1
-
-        if not is_feeder_found:
+        if visited_distance[fleas_X][fleas_Y] == -1 or not is_valid:
             all_distance = -1
-            break
-            
+            is_valid = False
+        else:
+            all_distance += visited_distance[fleas_X][fleas_Y]
         
     print(all_distance)
     

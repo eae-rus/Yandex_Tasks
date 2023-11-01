@@ -39,7 +39,7 @@ def main():
         if fleas_X == feeder_X and fleas_Y == feeder_Y:
             continue
 
-        visited_nodes = [[False for _ in range(N+1)] for _ in range(M+1)]
+        visited_nodes = [[False for _ in range(M+1)] for _ in range(N+1)]
         visited_nodes[fleas_X][fleas_Y] = True
         
         distance = 1

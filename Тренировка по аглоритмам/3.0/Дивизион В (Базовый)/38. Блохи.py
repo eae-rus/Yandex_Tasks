@@ -37,7 +37,7 @@ def main():
         
         distance = 1
         now_visited = []
-        now_visited.append([fleas_X, fleas_Y])
+        now_visited.append([feeder_X, feeder_Y])
         is_feeder_found = False
         while len(now_visited) > 0 and not is_feeder_found:
             next_visited = []
@@ -48,7 +48,7 @@ def main():
                     if is_valid_node(jump[0], jump[1], N, M, visited_nodes):
                         next_visited.append(jump)
                         
-                    if jump[0] == feeder_X and jump[1] == feeder_Y:
+                    if jump[0] == fleas_X and jump[1] == fleas_Y:
                         all_distance += distance
                         is_feeder_found = True
                         break

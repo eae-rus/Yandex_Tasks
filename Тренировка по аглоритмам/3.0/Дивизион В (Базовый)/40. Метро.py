@@ -8,8 +8,8 @@ def main():
     station_in_lines_arr.append([])
     for line in range(1, M+1):
         station_i = list(map(int, input().split()))
-        station_in_lines_arr.append(station_i)
-        for station in station_i:
+        station_in_lines_arr.append(station_i[1:])
+        for station in station_i[1:]:
             station_in_lines_matrix[line][station] = True
 
     start_st, end_st = list(map(int, input().split()))

@@ -9,7 +9,11 @@ def main():
         person_in_floor[i] = int(input())
 
     # FIXME: нужно исправить этот код
-    last_floor = n
+    last_floor = 0
+    for i in range(n, 0, -1):
+        if person_in_floor[i-1] > 0:
+            last_floor = i
+            break
     sum_time = last_floor
     people_in_elevator = 0
     while last_floor > 0:

@@ -33,6 +33,9 @@ def main():
             people_in_elevator = 0
             sum_time += person_floor // k * (2 * last_floor) - 1
             last_floor -= 1
+            while last_floor > 0 and person_in_floor[last_floor - 1] == 0:
+                last_floor -= 1
+                sum_time -= 1
 
     print(sum_time)
         

@@ -7,12 +7,11 @@ def main():
         if right - left < 2:
             return True
         else:
-            new_left = left
-            new_mid = left + 1
-            new_right = right
-            i_med = (left + right) // 2
-            x = arr[i_med]
-            arr[i_med], arr[left + 1] = arr[left + 1], arr[i_med]
+            new_left = left # left выходит за исследуемые границы слева
+            new_mid = left + 1 # mid равен первой исследуемой точке
+            new_right = right # right выходит за исследуемые границы справа
+            x = arr[new_mid]
+            arr[new_mid], arr[left + 1] = arr[left + 1], arr[new_mid]
             while new_right - new_mid > 1:
                 i_now = new_mid + 1
                 if arr[i_now] < x:

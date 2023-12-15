@@ -8,18 +8,22 @@ def main():
             return True
         else:
             new_left = left
+            new_mid = left + 1
             new_right = right
             i_med = (left + right) // 2
             x = arr[i_med]
-            new_left += 1
-            arr[i_med], arr[new_left] = arr[new_left], arr[i_med]
-            while new_right - new_left > 1:
-                if arr[new_left + 1] <= x:
+            arr[i_med], arr[left + 1] = arr[left + 1], arr[i_med]
+            while new_right - new_mid > 1:
+                i_now = new_mid + 1
+                if arr[i_now] < x:
                     new_left += 1
-                    arr[new_left - 1], arr[new_left] = arr[new_left], arr[new_left - 1]
+                    new_mid = i_now
+                    arr[new_left], arr[i_now] = arr[i_now], arr[new_left]
+                elif arr[i_now] == x:
+                    new_mid = i_now
                 else:
                     new_right -= 1
-                    arr[new_left + 1], arr[new_right] = arr[new_right], arr[new_left + 1]
+                    arr[i_now], arr[new_right] = arr[new_right], arr[i_now]
                     
             quick_sort(arr, left, new_left)
             quick_sort(arr, new_right-1, right)

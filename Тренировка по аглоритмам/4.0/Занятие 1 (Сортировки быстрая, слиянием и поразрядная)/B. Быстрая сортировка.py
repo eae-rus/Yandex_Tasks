@@ -2,7 +2,6 @@ def main():
     '''
     '''
     def quick_sort(arr, left = -1, right = None):
-        # FIXME: пока что не работает, я не правильно двигаю границы
         if right is None:
             right = len(arr)
         if right - left < 2:
@@ -10,8 +9,10 @@ def main():
         else:
             new_left = left
             new_right = right
-            x = arr[new_left + 1]
+            i_med = (left + right) // 2
+            x = arr[i_med]
             new_left += 1
+            arr[i_med], arr[new_left] = arr[new_left], arr[i_med]
             while new_right - new_left > 1:
                 if arr[new_left + 1] <= x:
                     new_left += 1

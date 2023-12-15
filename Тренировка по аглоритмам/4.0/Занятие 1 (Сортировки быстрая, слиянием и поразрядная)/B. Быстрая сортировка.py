@@ -10,8 +10,9 @@ def main():
             new_left = left # left выходит за исследуемые границы слева
             new_mid = left + 1 # mid равен первой исследуемой точке
             new_right = right # right выходит за исследуемые границы справа
-            x = arr[new_mid]
-            arr[new_mid], arr[left + 1] = arr[left + 1], arr[new_mid]
+            i_med = (left + right) // 2
+            x = arr[i_med]
+            arr[i_med], arr[left + 1] = arr[left + 1], arr[i_med]
             while new_right - new_mid > 1:
                 i_now = new_mid + 1
                 if arr[i_now] < x:
@@ -24,7 +25,7 @@ def main():
                     new_right -= 1
                     arr[i_now], arr[new_right] = arr[new_right], arr[i_now]
                     
-            quick_sort(arr, left, new_left)
+            quick_sort(arr, left, new_left+1)
             quick_sort(arr, new_right-1, right)
             return True
     

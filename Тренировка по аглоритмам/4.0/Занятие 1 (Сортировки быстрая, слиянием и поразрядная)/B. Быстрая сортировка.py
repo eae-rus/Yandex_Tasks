@@ -1,3 +1,5 @@
+import random
+
 def main():
     '''
     '''
@@ -10,7 +12,7 @@ def main():
             new_left = left # left выходит за исследуемые границы слева
             new_mid = left + 1 # mid равен первой исследуемой точке
             new_right = right # right выходит за исследуемые границы справа
-            i_med = (left + right) // 2
+            i_med = random.randint(left + 1, right - 1) # для повышения вычислительной устойчивости
             x = arr[i_med]
             arr[i_med], arr[left + 1] = arr[left + 1], arr[i_med]
             while new_right - new_mid > 1:

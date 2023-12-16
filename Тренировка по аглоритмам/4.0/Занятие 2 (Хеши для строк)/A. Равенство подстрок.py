@@ -14,8 +14,8 @@ def main():
     Q = int(input())
     for _ in range(Q):
         s_len, A_start, B_start = map(int, input().split())
-        h_A_B = h[A_start + s_len] + h[B_start] * degree_x[s_len]
-        h_B_A = h[B_start + s_len] + h[A_start] * degree_x[s_len]
+        h_A_B = (h[A_start + s_len] + h[B_start] * degree_x[s_len]) % 1000000007
+        h_B_A = (h[B_start + s_len] + h[A_start] * degree_x[s_len]) % 1000000007
         if h_A_B == h_B_A:
             print('yes')
         else:

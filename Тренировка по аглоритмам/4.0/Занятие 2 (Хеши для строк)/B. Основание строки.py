@@ -12,15 +12,17 @@ def main():
         index_char = ord(S[i - 1]) - ord('a') + 1
         h[i] = (h[i - 1] * x + index_char) % p
         degree_x[i] = degree_x[i-1] * x % p
-      
-    for i in range(1, n + 1):
+    
+    answer = n
+    for i in range(1, n):
         if (S[0] == S[i]):
             L = n-i # len_substring
             h_suffix_prefix = (h[L] + h[i] * degree_x[L]) % p
             h_prefix_suffix = h[n]
             if (h_prefix_suffix == h_suffix_prefix):
-                print(i)
+                answer = i
                 break
+    print(answer)
         
 if __name__ == '__main__':
 	main()

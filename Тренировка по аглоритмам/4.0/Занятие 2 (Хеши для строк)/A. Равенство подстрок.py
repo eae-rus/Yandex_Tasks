@@ -3,10 +3,9 @@ def main():
     '''
     S = input()
     h = [0] * (len(S) + 1)
-    x = 27 # в теории, можно и 27, так как англлийские буквы
+    x = 257 # в теории, можно и 27, так как англлийские буквы
     for i in range(1, len(S) + 1):
-        index_char = ord(S[i - 1]) - ord('a') + 1
-        h[i] = (h[i - 1] * x + index_char) % 1000000007
+        h[i] = (h[i - 1] * x + ord(S[i - 1])) % 1000000007
     
     Q = int(input())
     for _ in range(Q):

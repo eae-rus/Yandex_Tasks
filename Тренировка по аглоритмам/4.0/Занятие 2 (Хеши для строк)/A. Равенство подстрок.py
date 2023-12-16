@@ -4,19 +4,19 @@ def main():
     S = input()
     h = [0] * (len(S) + 1)
     x = 27 # в теории, можно и 27, так как англлийские буквы
+    degree_x = [1] * (len(S) + 1)
+    p = 1000000007
+    
     for i in range(1, len(S) + 1):
         index_char = ord(S[i - 1]) - ord('a') + 1
-        h[i] = (h[i - 1] * x + index_char) % 1000000007
-    degree_x = [1 for _ in range((len(S) + 1))]
-    for i in range(1, len(S) + 1):
+        h[i] = (h[i - 1] * x + index_char) % p
         degree_x[i] = degree_x[i-1] * x
     
     Q = int(input())
     for _ in range(Q):
-        s_len, A_start, B_start = map(int, input().split())
-        h_A_B = (h[A_start + s_len] + h[B_start] * degree_x[s_len]) % 1000000007
-        h_B_A = (h[B_start + s_len] + h[A_start] * degree_x[s_len]) % 1000000007
-        if h_A_B == h_B_A:
+        s_len, start_1, start_2 = map(int, input().split())
+        if ( (h[start_1 + s_len] + h[start_2] * degree_x[s_len]) % p ==
+             (h[start_2 + s_len] + h[start_1] * degree_x[s_len]) % p):
             print('yes')
         else:
             print('no')

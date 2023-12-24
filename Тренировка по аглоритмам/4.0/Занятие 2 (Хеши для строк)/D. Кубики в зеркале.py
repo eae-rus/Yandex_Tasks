@@ -18,14 +18,16 @@ def main():
         index_char = cubes[-i]
         h_2[i] = (h_2[i - 1] * x + index_char) % p
 
-        degree_x[i] = degree_x[i-1] * x % p
+        degree_x[i] = degree_x[i] * x % p
 
     answer = []
     start_i =  N // 2 + N % 2
     for i in range(start_i, N):
-        if (cubes[i-1] == cubes[i]):
-            h_sum_1 = h_1[N] + h_2[i] * degree_x[N]
-            h_sum_2 = h_2[N] + h_1[i] * degree_x[N]
+        if (cubes[-i] == cubes[-i-1]):
+            # h_sum_1 = h_1[N-i]
+            # h_sum_2 = h_2[i] - h_2[2*i-N] * degree_x[i-start_i]
+            h_sum_1 = (h_1[N-i] + h_2[2*i - N] * degree_x[2*i - N]) % p
+            h_sum_2 = h_2[i]
             if (h_sum_1 == h_sum_2):
                 answer.append(i)
     answer.append(N)

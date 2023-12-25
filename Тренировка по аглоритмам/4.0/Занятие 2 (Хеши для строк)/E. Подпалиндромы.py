@@ -1,32 +1,41 @@
-def count_palindromic_substrings(strings):
-    N = len(strings)
-    dp = [[False] * N for _ in range(N)]
+# E. Подпалиндромы
+# требуется изучить алгоритм Манакера
+# https://e-maxx.ru/algo/palindromes_count
+
+
+def count_palindromic_substrings(s):
+    n = len(s)
+    d1 = [0] * n
+    d2 = [0] * n
     count = 0
 
-    # Подстроки длины 1 всегда являются палиндромами
-    for i in range(N):
-        dp[i][i] = True
-        count += 1
+    # Обработка нечетной длины палиндромов
+    l, r = 0, -1
+    for i in range(n):
+        k = i > r and 1 or min(d1[l + r - i], r - i + 1)
+        while i + k < n and i - k >= 0 and s[i + k] == s[i - k]:
+            k += 1
+        d1[i] = k
+        if i + k - 1 > r:
+            l, r = i - k + 1, i + k - 1
+        count += (d1[i] + 1) // 2
 
-    # Проверяем подстроки длины 2
-    for i in range(N - 1):
-        if strings[i] == strings[i + 1]:
-            dp[i][i + 1] = True
-            count += 1
-
-    # Проверяем подстроки длины больше 2
-    for length in range(3, N + 1):
-        for i in range(N - length + 1):
-            j = i + length - 1
-            if strings[i] == strings[j] and dp[i + 1][j - 1]:
-                dp[i][j] = True
-                count += 1
+    # Обработка четной длины палиндромов
+    l, r = 0, -1
+    for i in range(n):
+        k = i > r and 0 or min(d2[l + r - i + 1], r - i + 1)
+        while i + k < n and (i - k - 1 >= 0 if i > 0 else True) and s[i + k] == s[i - k - 1]:
+            k += 1
+        d2[i] = k
+        if i + k - 1 > r:
+            l, r = i - k, i + k - 1
+        count += (d2[i] + 1) // 2
 
     return count
 
 def main():
-    strings = input()
-    answer = count_palindromic_substrings(strings)
+    s = input()
+    answer = count_palindromic_substrings(s)
     print(answer)
 
 if __name__ == '__main__':

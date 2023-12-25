@@ -21,17 +21,18 @@ def main():
 
     answer = N # по 1 символу
     
-    for len_sub in range(2, N+1): # длина подпалиндрома
+    for len_sub in range(2, 4): # длина подпалиндрома
         for ind in range(0, N+1-len_sub): # начало подпалиндрома
-            if len_sub <= 3: # можно убрать, но вроде бы она проще и быстрее
-                if strings[ind] == strings[ind + len_sub - 1]:
+           if strings[ind] == strings[ind + len_sub - 1]:
                     answer += 1
-            else:
-                #if (h_1[ind + len_sub] - h_1[ind] * degree_x[len_sub]) % p == (h_2[N - ind] - h_2[N - ind - len_sub] * degree_x[len_sub]) % p:
-                h_1_sum = (h_1[ind + len_sub] + h_2[N - ind - len_sub] * degree_x[len_sub]) % p
-                h_2_sum = (h_2[N - ind] + h_1[ind] * degree_x[len_sub]) % p
-                if (h_1_sum == h_2_sum):
-                     answer += 1
+    
+    for len_sub in range(4, N+1): # длина подпалиндрома
+        for ind in range(0, N+1-len_sub): # начало подпалиндрома
+            #if (h_1[ind + len_sub] - h_1[ind] * degree_x[len_sub]) % p == (h_2[N - ind] - h_2[N - ind - len_sub] * degree_x[len_sub]) % p:
+            h_1_sum = (h_1[ind + len_sub] + h_2[N - ind - len_sub] * degree_x[len_sub]) % p
+            h_2_sum = (h_2[N - ind] + h_1[ind] * degree_x[len_sub]) % p
+            if (h_1_sum == h_2_sum):
+                 answer += 1
     
     print(answer)
     

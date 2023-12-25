@@ -1,35 +1,33 @@
-def main():
-    '''
-    '''
-    strings = input()
-    
+def count_palindromic_substrings(strings):
     N = len(strings)
-    h_1 = [0] * (N + 1)
-    h_2 = [0] * (N + 1)
-    x = 27+1  # прописные латинские буквы
-    degree_x = [1] * (N + 1)
-    p = 1000000007
-    
-    for i in range(1, N + 1):
-        index_char = ord(strings[i - 1]) - ord('a') + 1
-        h_1[i] = (h_1[i - 1] * x + index_char) % p
-       
-        index_char = ord(strings[-i]) - ord('a') + 1
-        h_2[i] = (h_2[i - 1] * x + index_char) % p
+    dp = [[False] * N for _ in range(N)]
+    count = 0
 
-        degree_x[i] = degree_x[i-1] * x % p
+    # Подстроки длины 1 всегда являются палиндромами
+    for i in range(N):
+        dp[i][i] = True
+        count += 1
 
-    answer = N # по 1 символу
+    # Проверяем подстроки длины 2
+    for i in range(N - 1):
+        if strings[i] == strings[i + 1]:
+            dp[i][i + 1] = True
+            count += 1
 
-    for len_sub in range(2, N+1): # длина подпалиндрома
-        for ind in range(0, N+1-len_sub): # начало подпалиндрома
-            #if (h_1[ind + len_sub] - h_1[ind] * degree_x[len_sub]) % p == (h_2[N - ind] - h_2[N - ind - len_sub] * degree_x[len_sub]) % p:
-            h_1_sum = (h_1[ind + len_sub] + h_2[N - ind - len_sub] * degree_x[len_sub]) % p
-            h_2_sum = (h_2[N - ind] + h_1[ind] * degree_x[len_sub]) % p
-            if (h_1_sum == h_2_sum):
-                 answer += 1
-    
+    # Проверяем подстроки длины больше 2
+    for length in range(3, N + 1):
+        for i in range(N - length + 1):
+            j = i + length - 1
+            if strings[i] == strings[j] and dp[i + 1][j - 1]:
+                dp[i][j] = True
+                count += 1
+
+    return count
+
+def main():
+    strings = input()
+    answer = count_palindromic_substrings(strings)
     print(answer)
-    
+
 if __name__ == '__main__':
-	main()
+    main()

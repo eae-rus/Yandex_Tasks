@@ -44,7 +44,10 @@ def main():
     dist = -1
     if start_node != final_node:
         route = dijkstra(link_weights, start_node, final_node)
-        print(' '.join(map(str, route)))
+        if route != -1:
+            print(' '.join(map(str, route)))
+        else:
+            print(-1)
     else:
         print(start_node)
         

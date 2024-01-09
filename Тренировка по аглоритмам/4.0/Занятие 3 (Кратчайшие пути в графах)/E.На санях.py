@@ -40,19 +40,17 @@ def main():
     last_Olympic_Athletes = [0, [1]]
     while heap:
         time, city_now, road = heapq.heappop(heap)
+        road.append(city_now)
         last_Olympic_Athletes = [time, city_now, road]
         for i in range(len(heap)):
             time_next, city_next, road_next = heap[i]
-            new_time = time + dist[city_now][city_next] / T_V[city_next][1] + T_V[city_next][0]
-            if new_time - time_next < -0.00001:
-                road_next.append(city_now)
+            dist_A_B = dist[city_now][city_next]
+            new_time = time + dist_A_B / T_V[city_next][1] + T_V[city_next][0]
+            if new_time - time_next < 0:
+                road_next = road.copy()
                 heap[i] = [new_time, city_next, road_next]
 
-            # if city_next == 12 and new_time - time_next < -0.0001:
-            #     x = new_time - time_next
-
     time, city_now, road = last_Olympic_Athletes
-    road.append(city_now)
     road = road[::-1]
     print(time)
     print(" ".join(map(str, road)))

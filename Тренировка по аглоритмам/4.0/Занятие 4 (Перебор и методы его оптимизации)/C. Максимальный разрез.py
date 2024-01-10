@@ -18,11 +18,13 @@ def find_max_edge(node, adjacency_edges, visited):
 def count_cut_pieces(adjacency_edges):
     '''
     '''
+    N = len(adjacency_edges)
+    
     max_sum_edge = 0
     node = 1
-    visited = [False] * (len(adjacency_edges))
+    visited = [False] * (N)
     visited[0] = True
-    cut_arr = [0] * (len(adjacency_edges))
+    cut_arr = [0] * (N)
     cut = 1
     while not is_all_visited(visited):
         visited[node] = True
@@ -30,9 +32,19 @@ def count_cut_pieces(adjacency_edges):
         cut = (cut + 1) % 2 # Переключаем цвет, реализован простейший алгоритм
         new_node, edge = find_max_edge(node, adjacency_edges, visited)
         max_sum_edge += edge
-        node = new_node
         
-    return max_sum_edge, cut_arr
+        if new_node != 0:
+            node = new_node
+        elif cut_arr[1] != cut_arr[node]:
+            max_sum_edge += adjacency_edges[1][node]
+        
+    max_sum = 0
+    for i in range(1, N):
+        for j in range(i+1, N):
+            if cut_arr[i] != cut_arr[j]:
+                max_sum += adjacency_edges[i][j]
+        
+    return max_sum, cut_arr
 
 def main():
     '''
@@ -46,6 +58,7 @@ def main():
     max_sum_edge, cut_arr = count_cut_pieces(adjacency_edges)
     print(max_sum_edge)
     print(" ".join(map(str, cut_arr[1:])))
+    
 
 if __name__ == '__main__':
     main()

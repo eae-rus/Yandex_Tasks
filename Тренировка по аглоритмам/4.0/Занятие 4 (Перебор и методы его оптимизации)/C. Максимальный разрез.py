@@ -2,21 +2,17 @@ def calc_sum_edge(adjacency_edges, max_sum, node, cut_arr):
     '''
     '''
     for i in range(len(adjacency_edges)):
-        if cut_arr[i] != cut_arr[node]:
+        if cut_arr[i] != 2:
             max_sum -= adjacency_edges[node][i]
-    cut_arr[node] = 1
-    for i in range(len(adjacency_edges)):
-        if cut_arr[i] != cut_arr[node]:
+        if cut_arr[i] != 1:
             max_sum += adjacency_edges[node][i]  
-
+    cut_arr[node] = 1
+    
     return max_sum
 
 def find_max_edge(adjacency_edges, node, max_sum, cut_arr):
     '''
     '''
-    if node > len(adjacency_edges):
-        return [max_sum, cut_arr]
-
     max_sum_answer = max_sum
     mow_sum = 0
     cut_arr_answer = cut_arr.copy()
@@ -26,14 +22,15 @@ def find_max_edge(adjacency_edges, node, max_sum, cut_arr):
             max_sum_answer = mow_sum
             cut_arr_answer = cut_arr.copy()
 
-    node += 1
-    while node < len(adjacency_edges):
-        new_max_sum, new_cut_arr = find_max_edge(adjacency_edges, node, mow_sum, cut_arr.copy())
+    new_node = node + 1
+    while new_node < len(adjacency_edges):
+        new_max_sum, new_cut_arr = find_max_edge(adjacency_edges, new_node, mow_sum, cut_arr)
         if new_max_sum > max_sum_answer:
             max_sum_answer = new_max_sum
             cut_arr_answer = new_cut_arr.copy()
-        node += 1
-        
+        new_node += 1
+    
+    cut_arr[node] = 2
     return [max_sum_answer, cut_arr_answer]
     
 

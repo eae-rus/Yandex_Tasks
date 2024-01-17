@@ -2,11 +2,11 @@ def calc_sum_edge(adjacency_edges, max_sum, node, cut_arr):
     '''
     '''
     for i in range(len(adjacency_edges)):
-        if cut_arr[i] != 2:
+        if not cut_arr[i]:
             max_sum -= adjacency_edges[node][i]
-        if cut_arr[i] != 1:
+        if cut_arr[i]:
             max_sum += adjacency_edges[node][i]  
-    cut_arr[node] = 1
+    cut_arr[node] = False
     
     return max_sum
 
@@ -30,7 +30,7 @@ def find_max_edge(adjacency_edges, node, max_sum, cut_arr):
             cut_arr_answer = new_cut_arr.copy()
         new_node += 1
     
-    cut_arr[node] = 2
+    cut_arr[node] = True
     return [max_sum_answer, cut_arr_answer]
     
 
@@ -43,8 +43,13 @@ def main():
         adjacency_edges.append([0] + list(map(int, input().split())))
 
     # Вызываем функцию для подсчета количества разрезов
-    cut_arr = [2] * len(adjacency_edges) # начинаю с 2, т.к. просят в условии задачи
+    cut_arr = [True] * len(adjacency_edges) # начинаю с 2, т.к. просят в условии задачи
     max_sum_edge, cut_arr = find_max_edge(adjacency_edges, 1, 0, cut_arr)
+    for i in range(len(cut_arr)):
+        if cut_arr[i]:
+            cut_arr[i] = 2
+        else:
+            cut_arr[i] = 1
     print(max_sum_edge)
     print(" ".join(map(str, cut_arr[1:])))
     
